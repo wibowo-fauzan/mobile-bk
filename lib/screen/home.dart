@@ -10,6 +10,15 @@ class HomeScreen extends StatelessWidget {
     DateTime now = DateTime.now();
     String formattedDate = "${now.day}-${now.month}-${now.year}";
     String formattedTime = "${now.hour}:${now.minute}";
+    // absen masuk
+    String absenmasukstart = '06:45';
+    String absenmasukend = '07:40';
+    // absen masuk end
+
+    // absen pulang
+    String textpulangstart = '17:30';
+    String textpulangend = '17:59';
+    // absen pulang end
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -73,7 +82,7 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(left: 10),
                 child: Text(
-                  'Absensi',
+                  'about students',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -114,14 +123,89 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Your Text Here',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w400,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'NIK : 0066849592042',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          'Nama Siswa : Ammar Karim Akbar',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          'Jenis Kelamin : Laki - Laki',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        Text(
+                          'Number Phone : +62 877-4863-2717',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        if (formattedTime.compareTo(absenmasukstart) >= 0 &&
+                            formattedTime.compareTo(absenmasukend) <= 0)
+                          Text(
+                            'Absen Masuk: ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        if (formattedTime.compareTo(textpulangstart) >= 0 &&
+                            formattedTime.compareTo(textpulangend) <= 0)
+                          Text(
+                            'Absen Pulang: ',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Fungsi yang akan dijalankan saat tombol ditekan
+                            // Gantilah dengan logika yang sesuai untuk aplikasi Anda
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blue, // Warna latar belakang tombol
+                            onPrimary: Colors.white, // Warna teks tombol
+                          ),
+                          child: Text('Check In Students',
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ],
                     ),
                   ),
                 ),

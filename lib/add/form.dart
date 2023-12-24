@@ -36,22 +36,6 @@ class _FormScreenState extends State<FormScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Radio(
-                    value: 2,
-                    groupValue: _selectedRadio,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedRadio = value as int?;
-                      });
-                    },
-                  ),
-                  Text('Izin'),
-                ],
-              ),
-              SizedBox(height: 10),
               Container(
                 alignment: Alignment.center,
                 child: ElevatedButton(
