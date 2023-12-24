@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_bimbingankonseling_ammar/screen/home.dart';
-import 'package:flutter_application_bimbingankonseling_ammar/user/register.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -33,7 +32,7 @@ class LoginPage extends StatelessWidget {
           "Welcome Back",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text("Enter your credential to login, Bimbingan Konseling"),
       ],
     );
   }
@@ -94,16 +93,11 @@ class LoginPage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Don't have an account? "),
+        const Text(""),
         TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SignupPage()),
-            );
-          },
+          onPressed: () {},
           child: const Text(
-            "Sign Up",
+            "",
             style: TextStyle(color: Colors.purple),
           ),
         ),

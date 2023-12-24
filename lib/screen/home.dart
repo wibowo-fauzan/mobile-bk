@@ -7,8 +7,10 @@ import 'package:flutter_application_bimbingankonseling_ammar/user/login.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = "${now.day}-${now.month}-${now.year}";
+    String formattedTime = "${now.hour}:${now.minute}";
     return Scaffold(
-      // backgroundColor: Colors.yellow.shade700,
       appBar: AppBar(
         title: Text("Home"),
         automaticallyImplyLeading: false,
@@ -43,7 +45,92 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-
+      body: Column(
+        children: [
+          Card(
+            color: Color.fromRGBO(40, 37, 47, 1),
+            child: ListTile(
+              title: Text(
+                'Date: $formattedDate\nTime: $formattedTime',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+                textAlign: TextAlign.center, // Correct position for textAlign
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          SizedBox(
+            height: 20,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text(
+                  'Absensi',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Card(
+            color: Color.fromRGBO(40, 37, 47, 1),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                      ),
+                    ],
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/logs.jpg"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  height: 100,
+                  width: 100,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Your Text Here',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      // app Bar
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
