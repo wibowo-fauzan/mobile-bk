@@ -10,15 +10,26 @@ class HomeScreen extends StatelessWidget {
     DateTime now = DateTime.now();
     String formattedDate = "${now.day}-${now.month}-${now.year}";
     String formattedTime = "${now.hour}:${now.minute}";
+
+    // Mendapatkan jam saat ini
+    int currentHour = now.hour;
+    int currentMinute = now.minute;
+
+// Mengecek apakah waktu saat ini berada di antara jam 06:00 dan 07:45
     // absen masuk
-    String absenmasukstart = '06:45';
-    String absenmasukend = '07:40';
+    bool logicabsenmasuk =
+        currentHour == 6 && currentMinute >= 0 && currentHour < 8;
     // absen masuk end
 
+    // absen terlambat
+    bool logicabsenterlambat = currentHour >= 8 && currentHour < 16;
+    // absen terlambat end
+
     // absen pulang
-    String textpulangstart = '17:30';
-    String textpulangend = '17:59';
+    bool logicabsenpulang =
+        currentHour == 17 && currentMinute >= 0 && currentHour < 18;
     // absen pulang end
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -165,11 +176,11 @@ class HomeScreen extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
+                        // absen masuk
                         SizedBox(
                           height: 10,
                         ),
-                        if (formattedTime.compareTo(absenmasukstart) >= 0 &&
-                            formattedTime.compareTo(absenmasukend) <= 0)
+                        if (logicabsenmasuk)
                           Text(
                             'Absen Masuk: ',
                             style: TextStyle(
@@ -179,8 +190,8 @@ class HomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                        if (formattedTime.compareTo(textpulangstart) >= 0 &&
-                            formattedTime.compareTo(textpulangend) <= 0)
+                        // absen pulang
+                        if (logicabsenpulang)
                           Text(
                             'Absen Pulang: ',
                             style: TextStyle(
@@ -193,18 +204,39 @@ class HomeScreen extends StatelessWidget {
                         SizedBox(
                           height: 20,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            // Fungsi yang akan dijalankan saat tombol ditekan
-                            // Gantilah dengan logika yang sesuai untuk aplikasi Anda
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue, // Warna latar belakang tombol
-                            onPrimary: Colors.white, // Warna teks tombol
+                        if (logicabsenmasuk)
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary:
+                                  Colors.blue, // Warna latar belakang tombol
+                              onPrimary: Colors.white, // Warna teks tombol
+                            ),
+                            child: Text('Absen Masuk',
+                                style: TextStyle(color: Colors.white)),
                           ),
-                          child: Text('Check In Students',
-                              style: TextStyle(color: Colors.white)),
-                        ),
+                        if (logicabsenterlambat)
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary:
+                                  Colors.blue, // Warna latar belakang tombol
+                              onPrimary: Colors.white, // Warna teks tombol
+                            ),
+                            child: Text('Absen Terlambat',
+                                style: TextStyle(color: Colors.white)),
+                          ),
+                        if (logicabsenpulang)
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              primary:
+                                  Colors.blue, // Warna latar belakang tombol
+                              onPrimary: Colors.white, // Warna teks tombol
+                            ),
+                            child: Text('Absen Pulang',
+                                style: TextStyle(color: Colors.white)),
+                          ),
                       ],
                     ),
                   ),
