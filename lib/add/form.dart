@@ -9,7 +9,8 @@ class FormScreen extends StatefulWidget {
 }
 
 class _FormScreenState extends State<FormScreen> {
-  int? _selectedRadio;
+  // int? _selectedRadio;
+  bool _showText = false; // Menambahkan variabel untuk mengontrol tampilan teks
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class _FormScreenState extends State<FormScreen> {
             children: [
               TextField(
                 decoration: InputDecoration(
-                  hintText: "Keterangan",
+                  hintText: "Keterangan Siswa",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(18),
                     borderSide: BorderSide.none,
@@ -36,14 +37,32 @@ class _FormScreenState extends State<FormScreen> {
                 ),
               ),
               SizedBox(height: 10),
+              // Menampilkan teks di bawah input jika _showText adalah true
+              if (_showText)
+                Text(
+                  'Keterangan Anda Telah Di Rekap',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+              SizedBox(height: 10),
               Container(
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
+                    // Menampilkan teks di bawah input
+                    setState(() {
+                      _showText = true;
+                    });
+
+                    // Menunggu 5 detik sebelum pindah ke halaman berikutnya
+                    Future.delayed(Duration(seconds: 2), () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                      );
+                    });
                   },
                   style: ButtonStyle(
                     alignment: Alignment.center,

@@ -4,31 +4,29 @@ import 'package:flutter_application_bimbingankonseling_ammar/screen/about.dart';
 import 'package:flutter_application_bimbingankonseling_ammar/screen/profile.dart';
 import 'package:flutter_application_bimbingankonseling_ammar/user/login.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool hadir = false;
+  bool jampulang = false;
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     String formattedDate = "${now.day}-${now.month}-${now.year}";
     String formattedTime = "${now.hour}:${now.minute}";
 
-    // Mendapatkan jam saat ini
     int currentHour = now.hour;
     int currentMinute = now.minute;
 
-// Mengecek apakah waktu saat ini berada di antara jam 06:00 dan 07:45
-    // absen masuk
     bool logicabsenmasuk =
         currentHour == 6 && currentMinute >= 0 && currentHour < 8;
-    // absen masuk end
-
-    // absen terlambat
     bool logicabsenterlambat = currentHour >= 8 && currentHour < 16;
-    // absen terlambat end
-
-    // absen pulang
     bool logicabsenpulang =
         currentHour == 17 && currentMinute >= 0 && currentHour < 18;
-    // absen pulang end
 
     return Scaffold(
       appBar: AppBar(
@@ -38,14 +36,11 @@ class HomeScreen extends StatelessWidget {
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == "profile") {
-                // Navigasi ke halaman Profile
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => profilescreen()),
                 );
               } else if (value == "logOut") {
-                // Aksi ketika pilihan "Log Out" dipilih
-                // Misalnya, navigasi ke halaman login
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => LoginPage()),
@@ -77,9 +72,8 @@ class HomeScreen extends StatelessWidget {
                   fontSize: 12,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w400,
-                  height: 0,
                 ),
-                textAlign: TextAlign.center, // Correct position for textAlign
+                textAlign: TextAlign.center,
               ),
             ),
           ),
@@ -176,13 +170,12 @@ class HomeScreen extends StatelessWidget {
                             fontWeight: FontWeight.w400,
                           ),
                         ),
-                        // absen masuk
                         SizedBox(
                           height: 10,
                         ),
                         if (logicabsenmasuk)
                           Text(
-                            'Absen Masuk: ',
+                            'Absen Masuk: ${hadir ? "Hadir" : ""}',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
@@ -190,12 +183,31 @@ class HomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                        // absen pulang
+                        if (hadir)
+                          Text(
+                            'Data Anda Telah Di Rekap',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 12,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
                         if (logicabsenpulang)
                           Text(
-                            'Absen Pulang: ',
+                            'Absen Masuk: ${jampulang ? "Silahkan Pulang Dan Hati Hati Di Jalan" : ""}',
                             style: TextStyle(
                               color: Colors.white,
+                              fontSize: 12,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        if (jampulang)
+                          Text(
+                            'Data Anda Telah Di Rekap',
+                            style: TextStyle(
+                              color: Colors.blue,
                               fontSize: 12,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w400,
@@ -206,33 +218,44 @@ class HomeScreen extends StatelessWidget {
                         ),
                         if (logicabsenmasuk)
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                hadir = true;
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary:
-                                  Colors.blue, // Warna latar belakang tombol
-                              onPrimary: Colors.white, // Warna teks tombol
+                              primary: Colors.blue,
+                              onPrimary: Colors.white,
                             ),
                             child: Text('Absen Masuk',
                                 style: TextStyle(color: Colors.white)),
                           ),
                         if (logicabsenterlambat)
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FormScreen()),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary:
-                                  Colors.blue, // Warna latar belakang tombol
-                              onPrimary: Colors.white, // Warna teks tombol
+                              primary: Colors.red,
+                              onPrimary: Colors.white,
                             ),
                             child: Text('Absen Terlambat',
                                 style: TextStyle(color: Colors.white)),
                           ),
                         if (logicabsenpulang)
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                jampulang = true;
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
-                              primary:
-                                  Colors.blue, // Warna latar belakang tombol
-                              onPrimary: Colors.white, // Warna teks tombol
+                              primary: Colors.blue,
+                              onPrimary: Colors.white,
                             ),
                             child: Text('Absen Pulang',
                                 style: TextStyle(color: Colors.white)),
@@ -246,7 +269,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      // app Bar
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -289,8 +311,6 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10.0),
               child: InkWell(
                 onTap: () {
-                  // Tambahkan aksi yang ingin Anda lakukan ketika item ditekan
-                  // Misalnya, navigasi ke layar VisiMisiScreen
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => VisiMisiScreen()),
